@@ -99,65 +99,65 @@ class H3
    		//System.out.println(secendary_cost[1]);
 
    		double temp1=0;
-      	for(int i=1;i<=k;i++)
-      	{
-        	for(int j=2;j<=(k-i);j++)
-        	{
-            	if(secendary_cost_temp[j-1]<secendary_cost_temp[j])
-            	{
-               		temp1=secendary_cost_temp[j-1];
-               		secendary_cost_temp[j-1]=secendary_cost_temp[j];
-               		secendary_cost_temp[j]=temp1;
-            	}
-         	}
-      	}
+		for(int i=1;i<=k;i++)
+		{
+			for(int j=2;j<=(k-i);j++)
+			{
+			if(secendary_cost_temp[j-1]<secendary_cost_temp[j])
+			{
+				temp1=secendary_cost_temp[j-1];
+				secendary_cost_temp[j-1]=secendary_cost_temp[j];
+				secendary_cost_temp[j]=temp1;
+			}
+			}
+		}
 
-      	for(int i=1;i<=k;i++)
-   		{
-   			System.out.print(secendary_cost_temp[i]+" ");
-   		}
-   		System.out.println();
-        /*for(int i=1;i<=k;i++)
-        {
-        	System.out.print(secendary_cost_temp[i]);
-        }*/
+		for(int i=1;i<=k;i++)
+		{
+			System.out.print(secendary_cost_temp[i]+" ");
+		}
+		System.out.println();
+		/*for(int i=1;i<=k;i++)
+		{
+			System.out.print(secendary_cost_temp[i]);
+		}*/
 
-   		for(int i=1;i<=k;i++)
-   		{
-   			if(secendary_cost_temp[i]>=1)
-   			{
-   				for(int j=1;j<=k;j++)
-   				{
-   					if(secendary_cost_temp[i]==secendary_cost[j])
-   					{
-   						alotted_mules[j]=(int)Math.floor(secendary_cost[i]);
-   						mules1-=alotted_mules[j];
-   					}
-   				}
-   			}
-   			else if(secendary_cost_temp[i]==0)
-   			{
-   				for(int j=1;j<=k;j++)
-   				{
-   					if(secendary_cost_temp[i]==secendary_cost[j])
-   					{
-   						alotted_mules[j]=0;
-   						mules1-=alotted_mules[j];
-   					}
-   				}
-   			}
-   			else
-   			{
-   				for(int j=1;j<=k;j++)
-   				{
-   					if(secendary_cost_temp[i]==secendary_cost[j])
-   					{
-   						alotted_mules[j]=1;
-   						mules1-=alotted_mules[j];
-   					}
-   				}
-   			}
-   		}
+		for(int i=1;i<=k;i++)
+		{
+			if(secendary_cost_temp[i]>=1)
+			{
+				for(int j=1;j<=k;j++)
+				{
+					if(secendary_cost_temp[i]==secendary_cost[j])
+					{
+						alotted_mules[j]=(int)Math.floor(secendary_cost[i]);
+						mules1-=alotted_mules[j];
+					}
+				}
+			}
+			else if(secendary_cost_temp[i]==0)
+			{
+				for(int j=1;j<=k;j++)
+				{
+					if(secendary_cost_temp[i]==secendary_cost[j])
+					{
+						alotted_mules[j]=0;
+						mules1-=alotted_mules[j];
+					}
+				}
+			}
+			else
+			{
+				for(int j=1;j<=k;j++)
+				{
+					if(secendary_cost_temp[i]==secendary_cost[j])
+					{
+						alotted_mules[j]=1;
+						mules1-=alotted_mules[j];
+					}
+				}
+			}
+		}
    		if(mules1>0)
    		{
    			alotted_mules[highest_cost_cluster]+=mules1;
@@ -317,6 +317,8 @@ class H3
 		int[] tower=new int[k+1];
 		tower[1]=medoid[1];
 		
+		int[] clutster_visited=new int[n];
+
 		for(int i=2;i<=k;i++)
 		{	
 			flag=0;
@@ -330,22 +332,48 @@ class H3
 				}
 				else
 				{
-					for(int l=1;l<=n;l++)
+					for(int m=1;m<=n;m++)
 					{
-						if(tempclusters[l]==medoid[i])
+						int min=999999;
+						int l;
+						int index1;
+
+						for(l=1;l<=n;l++)
 						{
-							if(a[tower[j]][l]<=range)
+							if(tempclusters[l]==medoid[i] && a[tower[j]][l]<=min && clutster_visited==0 && tempclusters[l]!=medoid[i])
 							{
-								tower[i]=l;
-								flag=1;
-								break;
+								min=a[tower[j]][l];
+								index1=l;
 							}
+						}
+						if(a[tower[j]][index]<=range)
+						{
+							tower[i]=l;
+							flag=1;
+							break;
+						}
+						else
+						{
+							clutster_visited[l]=1;
 						}
 					}
 				}
 				if(flag==0)
 				{
 					System.out.println("towers not in range");
+
+					int min=999999;
+					int index1;
+
+					for(l=1;l<=n;l++)
+					{
+						if(tempclusters[l]==medoid[i] && a[tower[j]][l]<=min && tempclusters[l]!=medoid[i])
+						{
+							min=a[tower[j]][l];
+							index1=l;
+						}
+					}
+					System.out.println("Range should be = "+min+" and "+i+"th tower will be on "+index1);
 					System.exit(0);
 				}
 			}
@@ -487,7 +515,7 @@ class H3
 			{
 				initialmedoid[i]=medoid[i];
 				tempmedoid[i]=medoid[i];
-	       	}
+	       		}
 			//int[] sum2=new int[k+1];
 		
 			
@@ -607,7 +635,7 @@ class H3
    		}*/
 	
 		tower(medoid,tempclusters);
-    }
+    	}
 
 
 	public static void main(String[] args)
@@ -615,25 +643,25 @@ class H3
 		Scanner scan=new Scanner(System.in);
 
 		System.out.println("\nenter no. of DB's");
-	    n=scan.nextInt();
+		n=scan.nextInt();
 
-	    a=new double[n+1][n+1];
+		a=new double[n+1][n+1];
 		double points[][]=new double[n+1][2];
 		double d=0.0;
 		pathway=new double[n+1][n+1];
 
 		System.out.println("\nEnter x and y coordinates of every node");
-		
+
 		/*medoid[1]=1;
 		medoid[2]=5;
 		medoid[3]=10;*/
-		
+
 		for(int i=1;i<=n;i++)
 		{
 			points[i][0]=scan.nextDouble();
 			points[i][1]=scan.nextDouble();
 		}
-		
+
 		for(int j=1;j<=n;j++)
 		{
 			for(int i=1;i<=n-1;i++)
@@ -663,9 +691,9 @@ class H3
 		}
 	    
 	    
-	    System.out.println("\nenter no. of clusters");
-	    k=scan.nextInt();
+	    	System.out.println("\nenter no. of clusters");
+	   	k=scan.nextInt();
 
-	    kme();
+	    	kme();
 	}
 }
