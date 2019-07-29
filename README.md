@@ -41,17 +41,17 @@
 1. Let G1,G2,…,Gn be the group of DB’s covered by T1,T2,…,Tn, then we find cost of each group using TSP (Travelling Salesman Problem).
 2. Let X1,X2,…Xn be the cost of each group. We will calculate
 
-   C1=X1*mX1+X2+…+Xn,
+   C1=(X1*m)/(X1+X2+…+Xn),
 
-   C2=X2*mX1+X2+…+Xn,
-
-   .
+   C2=(X2*m)/(X1+X2+…+Xn),
 
    .
 
    .
 
-   CnXn*mX1+X2+…+Xn.
+   .
+
+   Cn=(Xn*m)/(X1+X2+…+Xn).
 
    (C1,C2,…Cn will be secondary costs of each group).
   
