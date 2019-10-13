@@ -303,10 +303,10 @@ class H1
      		
        		int[] clusters=new int[n+1];
        		int[] tempclusters=new int[n+1];
-			double[] distances=new double[k+1];
-			double[][] distances1=new double[n+1][k+1];
-			double min=10000.0;
-			int index=0;
+		double[] distances=new double[k+1];
+		double[][] distances1=new double[n+1][k+1];
+		double min=10000.0;
+		int index=0;
 
 
        		for(int i=1;i<=n;i++)
