@@ -310,39 +310,39 @@ class H1
 
 
        		for(int i=1;i<=n;i++)
+		{
+			Arrays.fill(distances,0);
+			min=100000;
+
+
+			for(int j=1;j<=k;j++)
 			{
-		    	Arrays.fill(distances,0);
-		    	min=100000;
-		    
-
-		    	for(int j=1;j<=k;j++)
-		    	{
-					distances[j]=pathway[medoid[j]][i];
-					if(distances[j]<min)
-					{
-			    		min=distances[j];
-			    		index=j;
-			    		clusters[i]=medoid[index];
-					}
-		    	}
-		    	distances1[i][index]=min;
-			}
-
-			System.out.println("\ninitial clusters");
-
-			for(int i=1;i<=k;i++)
-			{
-				System.out.print(medoid[i]+"  ( ");
-				for(int j=1;j<=n;j++)
+				distances[j]=pathway[medoid[j]][i];
+				if(distances[j]<min)
 				{
-					if(clusters[j]==medoid[i])
-					{
-						System.out.print(j+" ");
-					}
+					min=distances[j];
+					index=j;
+					clusters[i]=medoid[index];
 				}
-				System.out.print(")");
-				System.out.println();
 			}
+			distances1[i][index]=min;
+		}
+
+		System.out.println("\ninitial clusters");
+
+		for(int i=1;i<=k;i++)
+		{
+			System.out.print(medoid[i]+"  ( ");
+			for(int j=1;j<=n;j++)
+			{
+				if(clusters[j]==medoid[i])
+				{
+					System.out.print(j+" ");
+				}
+			}
+			System.out.print(")");
+			System.out.println();
+		}
 
 
 
@@ -363,7 +363,7 @@ class H1
 		
 		
 		while(flag==0)
-       	{
+       		{
 			int x=1;
 			for(int i=1;i<=n;i++)
 			{	
@@ -389,7 +389,7 @@ class H1
 			{
 				initialmedoid[i]=medoid[i];
 				tempmedoid[i]=medoid[i];
-	       	}
+	       		}
 			//int[] sum2=new int[k+1];
 			
 			
@@ -512,7 +512,7 @@ class H1
    		}*/
 	
 		tower(medoid,tempclusters);
-    }
+    	}
 
 
 	public static void main(String[] args)
@@ -520,9 +520,9 @@ class H1
 		Scanner scan=new Scanner(System.in);
 
 		System.out.println("\nenter no. of DB's");
-	    n=scan.nextInt();
+	    	n=scan.nextInt();
 
-	    a=new double[n+1][n+1];
+	    	a=new double[n+1][n+1];
 		double points[][]=new double[n+1][2];
 		double d=0.0;
 		pathway=new double[n+1][n+1];
@@ -570,8 +570,8 @@ class H1
 		}
 	    
 	    
-	    System.out.println("\nenter no. of clusters");
-	    k=scan.nextInt();
+	    	System.out.println("\nenter no. of clusters");
+	    	k=scan.nextInt();
 
 	    kme();
 	}
